@@ -1,9 +1,7 @@
-#include "ChainedHashTable.h"
+#includ "ChainedHashTable.h"
 #include "User.h"
 #include<bits/stdc++.h>
-#include<iostream>
 using namespace std;
-
 
 
 int main()
@@ -18,8 +16,8 @@ int main()
         cin >> lozinka;
         if(strcmp(ime, "izlaz") != 0){
             pData = new User(ime, lozinka);
-            HashObject<char*, User>* obj = new HashObject<char*, User>(ime, pData);
-            baza.insert(*obj);
+            HashObject<char*, User> obj(ime, pData);
+            baza.insert(obj);
         }
     }
     ime[0] = 'A';

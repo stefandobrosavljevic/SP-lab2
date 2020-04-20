@@ -13,7 +13,6 @@ protected:
 public:
     ChainedHashTable(unsigned int len);
 
-
     ~ChainedHashTable();
 
     void insert(HashObject<T,R> obj);
@@ -35,8 +34,6 @@ ChainedHashTable<T, R>::ChainedHashTable(unsigned int len)
 }
 
 
-
-
 template<class T, class R>
 ChainedHashTable<T, R>::~ChainedHashTable()
 {
@@ -53,7 +50,6 @@ ChainedHashTable<T, R>::~ChainedHashTable()
     }
     delete[] array;
 }
-
 
 
 template<class T, class R>
@@ -84,26 +80,9 @@ void ChainedHashTable<T, R>::withdraw(HashObject<T,R> obj)
 }
 
 
-
 template<class T, class R>
 void ChainedHashTable<T, R>::withdraw(T key)
 {
     HashObject<T,R> obj = find(key);
     withdraw(obj);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
