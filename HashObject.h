@@ -13,6 +13,7 @@ public:
     HashObject(T k) {key = k; record = NULL;}
     HashObject(T k, R* object) {key = k; record = object;}
     ~HashObject() { 
+        cout << "Destruktor: " << key << &record << endl;
         deleteRecord();
     }
     HashObject& operator = (HashObject const& obj){

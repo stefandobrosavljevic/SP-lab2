@@ -18,7 +18,9 @@ public:
 
     bool prazna() {return head == NULL;} 
 
-    void dodajNaPocetak(T el);
+    void dodajNaPocetak(T el){
+        head = new LLNode<T>(el, head);
+    }
 
     void dodajNaKraj(T el){
         LLNode<T>* pom = head;
@@ -146,7 +148,5 @@ public:
 
 };
 
-template<class T>
-void LList<T>::dodajNaPocetak(T el){
-    head = new LLNode<T>(el, head);
-}
+
+

@@ -1,4 +1,4 @@
-#includ "ChainedHashTable.h"
+#include "ChainedHashTable.h"
 #include "User.h"
 #include<bits/stdc++.h>
 using namespace std;
