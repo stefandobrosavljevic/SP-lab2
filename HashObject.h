@@ -1,4 +1,4 @@
-#include<bits/stdc++.h>
+#include<iostream>
 using namespace std;
 
 template<class T, class R>
@@ -12,8 +12,10 @@ public:
     HashObject() {key = (T)0; record = NULL;}
     HashObject(T k) {key = k; record = NULL;}
     HashObject(T k, R* object) {key = k; record = object;}
-    ~HashObject() { deleteRecord();}
-    HashObject& operator=(HashObject const& obj){
+    ~HashObject() { 
+        deleteRecord();
+    }
+    HashObject& operator = (HashObject const& obj){
         key = obj.key;
         record = obj.record;
         return *this;
@@ -22,6 +24,11 @@ public:
     bool operator == (HashObject const& obj){
         return record == obj.record;
     }
+
+    bool operator != (HashObject const& obj) {
+        return record != obj.record;
+    }
+
     void deleteRecord(){
         if(record){
             delete record;

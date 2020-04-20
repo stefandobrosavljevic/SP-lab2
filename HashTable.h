@@ -10,13 +10,14 @@ protected:
     unsigned int count;
 
     unsigned int h(HashObject<T, R> obj){
-        return (f(obj.getKey())%length);
+        return (f(obj.getKey()) % length);
     }
 
     virtual unsigned int f(int i) {return abs(i);}
     
     virtual unsigned int f(double d){
-        if (d == 0) return 0;
+        if (d == 0) 
+            return 0;
         else{
             int exponent;
             double mantissa = frexp(d, &exponent);
@@ -29,7 +30,7 @@ protected:
         unsigned int a = 7;
         for(int i = 0; s[i] != 0; ++i)
             res = res << a ^ s[i];
-            return res;
+        return res;
     }
 
     virtual unsigned int g(unsigned int i){

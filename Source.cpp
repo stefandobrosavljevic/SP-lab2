@@ -1,6 +1,7 @@
-#include "User.h"
 #include "ChainedHashTable.h"
+#include "User.h"
 #include<bits/stdc++.h>
+#include<iostream>
 using namespace std;
 
 
@@ -17,8 +18,8 @@ int main()
         cin >> lozinka;
         if(strcmp(ime, "izlaz") != 0){
             pData = new User(ime, lozinka);
-            HashObject<char*, User> obj(ime, pData);
-            baza.insert(obj);
+            HashObject<char*, User>* obj = new HashObject<char*, User>(ime, pData);
+            baza.insert(*obj);
         }
     }
     ime[0] = 'A';
@@ -32,10 +33,10 @@ int main()
         if (obj1 == obj2) {
             cout<< "Korisnik";
             obj1.print();
-            cout<< " je uspesnoprijavljen!" << endl;
+            cout<< " je uspesno prijavljen!" << endl;
         }
          else {
-             cout<< "Logovanjeneuspesno" << endl;
+             cout<< "Logovanje neuspesno" << endl;
          }
      }
      cout<< endl;
