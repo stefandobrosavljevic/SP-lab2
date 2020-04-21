@@ -1,32 +1,32 @@
 #include<iostream>
 using namespace std;
 
-template<class T>
+template<class string>
 class LLNode
 {
 public:
-    T info;
-    LLNode<T>* next;
+    string info;
+    LLNode<string>* next;
 
 public:
     LLNode(){
         next = NULL;
     }
 
-    LLNode(T el){
+    LLNode(string el){
         info = el;
         next = NULL;
     }
-    LLNode(T el, LLNode<T>* n){
+    LLNode(string el, LLNode<string>* n){
         info = el;
         next = n;
     }
 
     ~LLNode(){}
 
-    T print() {return info;}
+    string print() {return info;}
 
-    bool isEqual(T el){
+    bool isEqual(string el){
         return info == el;
     }
 

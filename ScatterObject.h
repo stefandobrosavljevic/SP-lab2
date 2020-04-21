@@ -1,15 +1,17 @@
+#pragma once
 #include"HashObject.h"
-#include<bits/stdc++.h>
+#include<iostream>
 using namespace std;
 
-template<class T, class R>
-class ScatterObject : public HashObject<T, R>
+
+class ScatterObject : public HashObject
 {
 public:
-    int status;
+    int status; // 0-slobodan, 1-obrisan, 2-zauzet
 
-    ScatterObject() : HashObject<T, R>() {status = 0;}
-    ScatterObject(T k) : HashObject<T, R> (k) {status = 0;}
-    ScatterObject(T k, R* object) : HashObject<T, R>(k) {status = 0;}
-   
+    ScatterObject() : HashObject() {status = 0;}
+    ScatterObject(string k) : HashObject (k) {status = 0;}
+    ScatterObject(string k, string object) : HashObject(k, object) {status = 0;}
+
+
 };

@@ -1,37 +1,27 @@
+#pragma once
 #include"HashObject.h"
-#include<bits/stdc++.h>
+//#include<bits/stdc++.h>
+#include<iostream>
 using namespace std;
 
-template<class T, class R>
+
 class HashTable
 {
 protected:
-    unsigned int length;
-    unsigned int count;
+    unsigned int length = 0;
+    unsigned int count = 0;
 
-    unsigned int h(HashObject<T, R> obj){
+    unsigned int h(HashObject& obj){
         return (f(obj.getKey()) % length);
     }
 
-    virtual unsigned int f(int i) {return abs(i);}
-    
-    virtual unsigned int f(double d){
-        if (d == 0) 
-            return 0;
-        else{
-            int exponent;
-            double mantissa = frexp(d, &exponent);
-            return (unsigned int)((2 * fabs(mantissa) - 1) * ~0U);
-        }
-    }
-
-    virtual unsigned int f(char* s){
+    virtual unsigned int f(string s){
         unsigned int res = 0;
         unsigned int a = 7;
-        for(int i = 0; s[i] != 0; ++i)
-            res = res << a ^ s[i];
+        for(int i = 0; s[i] != 0; i++)
+            res = res * 31 + s[i];
         return res;
-    }
+    } 
 
     virtual unsigned int g(unsigned int i){
         return (i + 1) % length;

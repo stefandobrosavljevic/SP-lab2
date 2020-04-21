@@ -1,5 +1,5 @@
+//#include<bits/stdc++.h>
 #include<iostream>
-#include<bits/stdc++.h>
 using namespace std;
 class User
 {
@@ -37,7 +37,6 @@ public:
         return strcmp(name, user.name) == 0 &&
             strcmp(password, user.password) == 0;
     }
-
 
     void print(){
         cout << name << " | " << password << endl;

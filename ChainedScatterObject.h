@@ -1,17 +1,18 @@
+#pragma once
 #include "ScatterObject.h"
-#include <bits/stdc++.h>
+#include <iostream>
 using namespace std;
 
 
-template<class T, class R>
-class ChainedScatterObject : public ScatterObject<T, R>
+
+class ChainedScatterObject : public ScatterObject
 {
 public:
     long next;
 
-    ChainedScatterObject() : ScatterObject<T, R>() {next = -1;}
-    ChainedScatterObject(T k) : ScatterObject<T, R>(k) {next = -1;}
-    ChainedScatterObject(T k, R* object) : ScatterObject<T, R>(k, object) {next = -1;}
-    ChainedScatterObjext(T k, R* object, long n) : ScatterObject<T, R> (k, object) { next = n;}
+    ChainedScatterObject() : ScatterObject() {next = -1;}
+    ChainedScatterObject(string k) : ScatterObject(k) {next = -1;}
+    ChainedScatterObject(string k, string object) : ScatterObject(k, object) {next = -1;}
+    ChainedScatterObject(string k, string object, long n) : ScatterObject (k, object) { next = n;}
 
 };

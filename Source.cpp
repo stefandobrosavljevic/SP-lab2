@@ -1,35 +1,36 @@
-#include "ChainedHashTable.h"
+#include "ChainedScatterTable.h"
 #include "User.h"
-#include<bits/stdc++.h>
+//#include<bits/stdc++.h>
+#include<iostream>
 using namespace std;
 
 
 int main()
 {
-    ChainedHashTable<char*, User> baza(10);
+    ChainedScatterTable baza(10);
     int id;
-    char ime[10], lozinka[10];
-    User *pData;
-    while(strcmp(ime, "izlaz") != 0){
-        cin >> id;
+    string ime = "A";
+    string lozinka;
+    while(ime != "izlaz"){
+        cout << "Unesite ime i lozinku" << endl;
         cin >> ime;
         cin >> lozinka;
-        if(strcmp(ime, "izlaz") != 0){
-            pData = new User(ime, lozinka);
-            HashObject<char*, User> obj(ime, pData);
-            baza.insert(obj);
+        if(ime != "izlaz"){
+            if (baza.Register(ime, lozinka))
+                cout << "Uspesno!" << endl;
+            else
+                cout << "Neuspesno!" << endl;
         }
     }
     ime[0] = 'A';
     ime[1] = '\0';
-    while (strcmp(ime, "izlaz") != 0) {
-        cin>> ime;
-        cin>> lozinka;
-        pData= new User(ime, lozinka);
-        HashObject<char*, User> obj1(ime, pData);
-        HashObject<char*, User> obj2 = baza.find(obj1.getKey());
-        if (obj1 == obj2) {
-            cout<< "Korisnik";
+    while (ime != "izlaz") {
+        cin >> ime;
+        cin >> lozinka;
+        ChainedScatterObject obj1(ime, lozinka);
+        ChainedScatterObject obj2 = baza.find(obj1.getKey());
+        if (obj2.getRecord() != nullptr) {
+            cout<< "Korisnik ";
             obj1.print();
             cout<< " je uspesno prijavljen!" << endl;
         }
@@ -38,4 +39,6 @@ int main()
          }
      }
      cout<< endl;
+
+     return 0;
  }

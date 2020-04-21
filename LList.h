@@ -3,43 +3,43 @@
 #include<iostream>
 using namespace std;
 
-template<class T>
+template<class string>
 class LList
 {
 public:
-    LLNode<T>* head;
+    LLNode<string>* head;
    
     LList() {head = NULL;}
 
     ~LList(){
         while(!prazna())
-            T pom = brisiSaPocetka();
+            string pom = brisiSaPocetka();
     }
 
     bool prazna() {return head == NULL;} 
 
-    void dodajNaPocetak(T el){
-        head = new LLNode<T>(el, head);
+    void dodajNaPocetak(string el){
+        head = new LLNode<string>(el, head);
     }
 
-    void dodajNaKraj(T el){
-        LLNode<T>* pom = head;
+    void dodajNaKraj(string el){
+        LLNode<string>* pom = head;
         if(!prazna())
         {
             while(pom->next != NULL)
             {
                 pom = pom->next;
             }
-            LLNode<T>* temp = new LLNode<T>(el);
+            LLNode<string>* temp = new LLNode<string>(el);
             pom->next = temp;
         }
     }
 
-    T brisiSaPocetka(){
+    string brisiSaPocetka(){
         if(prazna())
             throw exception();
-        T el = head->info;
-        LLNode<T>* pom = head;
+        string el = head->info;
+        LLNode<string>* pom = head;
         if(head->next == NULL)
             head = NULL;
         else
@@ -48,8 +48,8 @@ public:
         return el;
     }
 
-    T brisiSaKraja(){
-        T el;
+    string brisiSaKraja(){
+        string el;
         if(prazna())
             throw exception();
         else if(head->next == NULL)
@@ -60,7 +60,7 @@ public:
         }
         else
         {
-            LLNode<T>* pom = head;
+            LLNode<string>* pom = head;
             while(pom->next->next != NULL)
             {
                 pom = pom->next;
@@ -72,14 +72,14 @@ public:
         return el;
     }
     
-    LLNode<T>* pronadji(T el){
+    LLNode<string>* pronadji(string el){
         if(prazna())
             throw exception();
         else if(head->info == el)
             return head;
         else
         {
-            LLNode<T>* pom = head;
+            LLNode<string>* pom = head;
             while(pom->info != el && pom->next != NULL)
             {
                pom = pom->next;
@@ -93,17 +93,17 @@ public:
         }
     }
 
-    LLNode<T>* uzmiHead() {return head;}
+    LLNode<string>* uzmiHead() {return head;}
 
-    LLNode<T>* uzmiSledeci(LLNode<T>* pom){
+    LLNode<string>* uzmiSledeci(LLNode<string>* pom){
         if(pom->next == NULL)
             throw exception();
         return pom->next;
     }
 
-    T uzmiSled(T el)
+    string uzmiSled(string el)
     {
-        LLNode<T>* pom = pronadji(el);
+        LLNode<string>* pom = pronadji(el);
         if (pom->next == NULL) {
             cout << "Element nema sledeci u listi" << endl;
             throw exception();
@@ -111,19 +111,19 @@ public:
         return pom->next->info;
     }
 
-    T getHeadEl() { return head->info; }
+    string getHeadEl() { return head->info; }
 
     void stampaj(){
         if(!prazna())
         {
-            for(LLNode<T>* pom = head; pom != NULL; pom = pom->next)
+            for(LLNode<string>* pom = head; pom != NULL; pom = pom->next)
                 cout << pom->print() << " ";
             cout << endl;
         }
     }
 
-    bool uListi(T el){
-        LLNode<T>* pom = head;
+    bool uListi(string el){
+        LLNode<string>* pom = head;
         while(pom->info != el && pom->next != NULL)
         {
             pom = pom->next;
@@ -133,15 +133,15 @@ public:
         return true;
     }
 
-    void brisi(T el){
-        LLNode<T>* pom = head;
+    void brisi(string el){
+        LLNode<string>* pom = head;
         while(pom->next->info != el && pom->next->next != NULL)
         {
             pom = pom->next;
         }
         if(pom->next->next == NULL)
             throw exception();
-        LLNode<T>* x = pom->next->next;
+        LLNode<string>* x = pom->next->next;
         delete pom->next;
         pom->next = x;
     }
