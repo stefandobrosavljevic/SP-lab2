@@ -8,14 +8,15 @@ using namespace std;
 class ChainedScatterTable : public HashTable
 {
 protected:
-    ChainedScatterObject * array;
-    //LList<ChainedScatterObject>* sinonimi;
+    ChainedScatterObject* array;
+    ChainedScatterObject* sinonimi;
 
 public:
     ChainedScatterTable(unsigned int len){
         this->length = len;
         this->count = 0;
         array = new ChainedScatterObject[len];
+        sinonimi = new ChainedScatterObject[len];
     }
 
     ~ChainedScatterTable() {
@@ -28,15 +29,24 @@ public:
         long probe = this->h(obj);
         if(array[probe].status == 2)
         {
-            while(array[probe].next != -1)
-                probe = array[probe].next;
-            long tail = probe;
-            probe = this->g(probe);
-            while(array[probe].next != -1 && probe != tail)
+            if (sinonimi[probe].status == 2) {
+                while(sinonimi[probe].next != -1)
+                    probe = sinonimi[probe].next;
+                long tail = probe;
                 probe = this->g(probe);
-            if(probe == tail)
-                throw new exception("Poor secondary transf");
-            array[tail].next = probe;
+                while (sinonimi[probe].next != -1 && probe != tail)
+                    probe = this->g(probe);
+                if (probe == tail)
+                    throw new exception("Poor secondary transf");
+                sinonimi[tail].next = probe;
+
+            }
+            sinonimi[probe] = obj;
+            sinonimi[probe].status = 2;
+            sinonimi[probe].next = -1;
+            this->count++;
+            return;
+           
         }
         array[probe] = obj;
         array[probe].status = 2;
@@ -46,13 +56,22 @@ public:
 
     ChainedScatterObject find(string key){
         long probe = this->f(key) % this->length;
-        while(probe != -1) //probe != -1
-        {
-            if(!array[probe].isEqualKey(key)) //.isEqualKey(key)
-                probe = array[probe].next;
-            else
-                return array[probe];
+        if (!array[probe].isEqualKey(key)) {
+            while (probe != -1) 
+            {
+                if (!sinonimi[probe].isEqualKey(key))
+                    probe = sinonimi[probe].next;
+                else {
+                    cout << "Pronadjen sinonim " << key << endl;
+                    return sinonimi[probe];
+                }
+            }
         }
+        else {
+            cout << "Pronadjen original " << key << endl;
+            return array[probe];
+        }
+        cout << "Nije pronadjen " << key << endl;
         ChainedScatterObject obj;
         return obj;
     }
@@ -69,15 +88,14 @@ public:
         if (probe == -1)
             throw new exception("Element not found!");
         if( prev != -1) {
-            // brise se sinonim
             array[prev].next = array[probe].next;
             array[probe].deleteRecord();
-            array[probe].status = 1; // obrisan
+            array[probe].status = 1;
         }
         else{
             if(array[probe].next == -1){
                 array[probe].deleteRecord();
-                array[probe].status = 1; // obrisan
+                array[probe].status = 1;
             }
             else{
                 long nextEl = array[probe].next;
@@ -85,7 +103,7 @@ public:
                 array[probe] = array[nextEl];
                 array[probe].next = array[nextEl].next;
                 array[nextEl] = ChainedScatterObject();
-                array[nextEl].status = 1; // obrisan
+                array[nextEl].status = 1;
             }
         }
         this->count--;
@@ -106,8 +124,11 @@ public:
         {
             ChainedScatterObject obj(domain, ID);
             this->insert(obj);
+            cout << "Uspesno registrovanje: " << domain << endl;
             return true;
         }
+
+        cout << "Neuspesno registrovanje: " << domain << endl;
         return false;
     }
 

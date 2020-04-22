@@ -10,7 +10,8 @@ protected:
     string* record;
 
 public:
-    HashObject() { //key = (T)0; 
+    HashObject() { 
+        //key = (T)0; 
         record = nullptr; }
     HashObject(string k) { key = k; record = NULL; }
     HashObject(string k, string record) 

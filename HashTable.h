@@ -18,8 +18,10 @@ protected:
     virtual unsigned int f(string s){
         unsigned int res = 0;
         unsigned int a = 7;
-        for(int i = 0; s[i] != 0; i++)
-            res = res * 31 + s[i];
+        for (int i = 0; s[i] != 0; i++) {
+            res = res * 41 - s[i];
+            //res = res + s[i]; //za probu da se napravi sinonim
+        }
         return res;
     } 
 
